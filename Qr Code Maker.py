@@ -1,6 +1,6 @@
 import qrcode
 
-img = qrcode.make("https://www.instagram.com/rohitbedse_/")
+img = qrcode.make("Enter Your Link Here")
 
 img.save("myQrcode.png")
 img.show()
