@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>QR Code Generator</h1>
+        <p>Enter a URL to generate a QR code.</p>
+        <input type="text" placeholder="URL" id="qrText">
+        <div class="imgBox">
+            <img src="" id="qrImage" alt="QR Code">
+        </div>
+        <button onclick="GenerateQR()">Generate QR Code</button>
+        <button onclick="DownloadQR()">Download QR Code</button>
+        <button onclick="Exit()">Exit</button>
+    </div>
+    <script>
+        // JavaScript code here
+        let imgBox = document.querySelector(".imgBox");
+        let qrImage = document.getElementById("qrImage");
+        let qrText = document.getElementById("qrText");
+
+        function GenerateQR() {
+            if (qrText.value.length > 0) {
+                qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + encodeURIComponent(qrText.value);
+                imgBox.classList.add("show-img");
+            }
+        }
+
+        function DownloadQR() {
+            if (qrImage.src) {
+                const link = document.createElement('a');
+                link.href = qrImage.src;
+                link.download = 'qrcode.png';
+                link.click();
+            }
+        }
+
+        function Exit() {
+            imgBox.classList.remove("show-img");
+            qrImage.src = "";
+            qrText.value = "";
+        }
+    </script>
+</body>
+</html>
